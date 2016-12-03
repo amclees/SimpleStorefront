@@ -8,7 +8,7 @@
 
 <c:if test="${ empty list }">
 	<div class="jumbotron">
-		<h2>There are no logs.</h2>
+		<h2>There are no orders in history.</h2>
 	</div>
 </c:if>
 
@@ -16,15 +16,13 @@
 <c:if test="${ not empty list }">
 <table class="table table-bordered table-hover">
 <tr>
-	<th>Timestamp</th>
-	<th>Name</th>
+	<th>Order ID</th>
 	<th>Description</th>
 </tr>
 <c:forEach items="${ list }" var="item">
 	<tr>
-		<td><fmt:formatDate value="${ item.timeStamp }" pattern="GG yyyy EEEE MMMM dd, HH:mm:ss" /></td>
-		<td>${ item.name }</td>
-		<td>${ item.description }</td>
+		<td>${ item.id }</td>
+		<td><span style="white-space: pre-line">${ item.text }</span></td>
 	</tr>
 </c:forEach>
 </table>

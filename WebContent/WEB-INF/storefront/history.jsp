@@ -12,13 +12,13 @@
 
 <div class="container">
 	<div class="page-header">
-		<h1>Your Cart <small>Storefront</small></h1>
-		<a href="Store">Back to Storefront</a> | <a href="Checkout">Go to Checkout</a>
+		<h1>History <small>Storefront</small></h1>
+		<a href="Store">Back to Storefront</a>
 	</div>
 	
 	<br />
 	
-	<cs3220:itemlist list="${ cart }" cartOn="true" />
+	<cs3220:loglist list="${ items }" />
 	
 </div>
 

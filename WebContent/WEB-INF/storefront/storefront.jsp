@@ -15,7 +15,7 @@
 <div class="container">
 	<div class="page-header">
 		<h1>Available Items <small>Storefront</small></h1>
-		<a href="ShoppingCart">View Cart</a> | <a href="Checkout">Go to Checkout</a>
+		<a href="ShoppingCart">View Cart</a> | <a href="Checkout">Go to Checkout</a> | <a href="History">Go to History</a> | <a href="Inventory">Modify Inventory</a>
 		<p>The number of types of items in your shopping cart is ${ cart.size() }</p>
 	</div>
 	

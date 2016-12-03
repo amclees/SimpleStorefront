@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import simplestorefront.models.LogItem;
+import simplestorefront.models.Order;
 import simplestorefront.models.StoreItem;
 
 /**
@@ -24,20 +24,9 @@ import simplestorefront.models.StoreItem;
 @WebServlet("/History")
 public class History extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public History() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<LogItem> items = new LinkedList<LogItem>();
+		List<Order> items = new LinkedList<Order>();
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -53,7 +42,7 @@ public class History extends HttpServlet {
 		try {
 			db = DriverManager.getConnection(url, user, password);
 			
-			String sql = "SELECT * FROM logs";
+			String sql = "SELECT * FROM logs ORDER BY id DESC";
 			
 			PreparedStatement pstmt = db.prepareStatement(sql);
 
@@ -62,10 +51,9 @@ public class History extends HttpServlet {
 			ResultSet results = pstmt.getResultSet();
 			
 			while(results.next()) {
-				items.add(new LogItem(
-						results.getString(2), //name
-						results.getString(3), //description
-						new Date(results.getTimestamp(1).getTime())//timestamp
+				items.add(new Order(
+						results.getInt(1),
+						results.getString(2)
 						));
 			}
 			
@@ -84,9 +72,6 @@ public class History extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="cs3220" uri="http://github.com/xv435/SimpleStorefront"%>
-
+<fmt:setLocale value="en_US" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,9 +17,19 @@
 		<h1>Checkout <small>Storefront</small></h1>
 		<a href="Store">Back to Store</a>
 	</div>
-	<fmt:setLocale value="en_US" />
+	
 	<h4>Your Order</h4>
 	<cs3220:itemlist list="${ cart }" cartOn="true" />
+	
+	<hr />
+	<p>Please verify your order details above, then fill out you details and submit your order.</p>
+	<form method="POST" action="Checkout">
+		<label>Email <input type="text" name="email" class="form-control" placeholder="Email" /></label>
+		<label>First Name <input type="text" name="firstname" class="form-control" placeholder="First Name" /></label>
+		<label>Last Name <input type="text" name="lastname" class="form-control" placeholder="Last Name" /></label>
+		<br />
+		<input type="submit" value="Submit Order" class="btn btn-success" />
+	</form>
 
 </div>
 

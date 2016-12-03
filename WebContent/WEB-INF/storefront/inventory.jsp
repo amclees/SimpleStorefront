@@ -11,7 +11,10 @@
 <body>
 	<div class="container">
 	<fmt:setLocale value="en_US" />
-	
+	<div class="page-header">
+		<h1>Inventory Manager <small>Storefront</small></h1>
+		<a href="Store">Back to Store</a>
+	</div>
 	<h3>Create a New Item</h3>
 	<form action="Inventory" method="POST">
 		<input type="text" name="name" placeholder="Name of Item" class="form-control" />
@@ -41,6 +44,7 @@
 		<th>Quantity</th>
 		<th>Image</th>
 		<th>Add/Remove Items</th>
+		<th>Delete Type</th>
 		<th>Details</th>
 	</tr>
 	
@@ -51,11 +55,18 @@
 			<td>${ item.quantity }</td>
 			<td><img src="${ item.imagePath }" alt="No Image" /></td>
 			<td>
-					<form action="Inventory" method="POST" >
+				<form action="Inventory" method="POST" >
 					<input type="text" name="quantity" placeholder="Positive or Negative" value="${ -1 * item.quantity }" />
 					<input type="hidden" name="id" value="${ item.id }" />
-					<input type="submit" class="btn btn-danger" value="Modify Stock" />
-					</form>
+					<input type="submit" class="btn btn-success" value="Modify Stock" />
+				</form>
+			</td>
+			<td>
+				<form action="Inventory" method="POST" >
+					<input type="hidden" name="id" value="${ item.id }" />
+					<input type="hidden" name="delete" value="true" />
+					<input type="submit" class="btn btn-danger" value="Delete Item" />
+				</form>
 			</td>
 			<td>
 				${ item.details }
