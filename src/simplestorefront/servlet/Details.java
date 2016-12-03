@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,29 +14,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import simplestorefront.models.LogItem;
+import simplestorefront.models.DBUtil;
 import simplestorefront.models.StoreItem;
 
 /**
- * Servlet implementation class History
+ * Servlet implementation class Storefront
  */
-@WebServlet("/History")
-public class History extends HttpServlet {
+@WebServlet("/Details")
+public class Details extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public History() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<LogItem> items = new LinkedList<LogItem>();
+		StoreItem item;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -53,24 +44,34 @@ public class History extends HttpServlet {
 		try {
 			db = DriverManager.getConnection(url, user, password);
 			
-			String sql = "SELECT * FROM logs";
+			String sql = "SELECT * FROM items WHERE id=?";
 			
 			PreparedStatement pstmt = db.prepareStatement(sql);
 
+			pstmt.setString(1, request.getParameter("id"));
+			
 			pstmt.executeQuery();
 			
 			ResultSet results = pstmt.getResultSet();
 			
-			while(results.next()) {
-				items.add(new LogItem(
+			results.next();
+			item = new StoreItem(
+						results.getInt(1), //id
 						results.getString(2), //name
-						results.getString(3), //description
-						new Date(results.getTimestamp(1).getTime())//timestamp
-						));
-			}
-			
+						results.getDouble(3), //price
+						results.getInt(4), //quantity
+						results.getString(5), //image path
+						results.getString(6)
+						);
+			request.setAttribute("item", item);
+			List<StoreItem> items = new LinkedList<StoreItem>();
+			items.add(item);
+			request.setAttribute("items", items);
+			request.getRequestDispatcher("/WEB-INF/storefront/details.jsp").forward(request, response);
+			return;
 		} catch(Exception e) {
 			e.printStackTrace();
+			response.sendRedirect("Store");
 		} finally {
 			try {
 				if(db != null) db.close();
@@ -79,16 +80,7 @@ public class History extends HttpServlet {
 			}
 		}
 		
-		request.setAttribute("items", items);
-		request.getRequestDispatcher("/WEB-INF/storefront/history.jsp").forward(request, response);;
-
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		
 	}
 
 }

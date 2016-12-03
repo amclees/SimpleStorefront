@@ -10,33 +10,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import simplestorefront.models.DBUtil;
 import simplestorefront.models.StoreItem;
 
 /**
- * Servlet implementation class Storefront
+ * Servlet implementation class Cart
  */
-@WebServlet("/Store")
-public class Storefront extends HttpServlet {
+@WebServlet("/ShoppingCart")
+public class Cart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<StoreItem> items = DBUtil.getItems();
 		if(request.getSession().getAttribute("cart") == null) {
 			request.getSession().setAttribute("cart", new LinkedList<StoreItem>());
 		}
-		request.setAttribute("list", items);
-		request.getRequestDispatcher("/WEB-INF/storefront/storefront.jsp").forward(request, response);
+		double totalPrice = 0;
+		for(StoreItem item : (List<StoreItem>)request.getSession().getAttribute("cart")) {
+			totalPrice += item.getQuantity() * item.getPrice();
+		}
+		request.setAttribute("totalPrice", totalPrice);
+		request.getRequestDispatcher("/WEB-INF/storefront/cart.jsp").forward(request, response);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
+	
 }

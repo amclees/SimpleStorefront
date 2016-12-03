@@ -6,13 +6,15 @@ public class StoreItem {
 	private double price;
 	private int quantity;
 	private String imagePath;
+	private String details;
 	
-	public StoreItem(int id, String name, double price, int quantity, String imagePath) {
+	public StoreItem(int id, String name, double price, int quantity, String imagePath, String details) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
 		this.imagePath = imagePath;
+		this.details = details;
 	}
 	
 	public String getName() {
@@ -41,5 +43,13 @@ public class StoreItem {
 	}
 	public int getId() {
 		return id;
+	}
+
+	public String getDetails() {
+		return details;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
 	}
 }
