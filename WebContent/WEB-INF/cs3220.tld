@@ -1,27 +1,22 @@
-<taglib xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+<taglib xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
         http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
-    version="2.1">
+        version="2.1">
 
-    <display-name>CS3200 Custom Tags</display-name>    
-    <tlib-version>1.0</tlib-version>
-    <short-name>cs3220</short-name>
-    <uri>http://github.com/xv435/SimpleStorefront</uri>
+  <display-name>CS3200 Custom Tags</display-name>
+  <tlib-version>1.0</tlib-version>
+  <short-name>cs3220</short-name>
+  <uri>http://github.com/xv435/SimpleStorefront</uri>
 
-    <tag-file>
-        <name>itemlist</name>
-        <path>/WEB-INF/tags/itemlist.tag</path>
-    </tag-file>
-    
-    <tag-file>
-        <name>loglist</name>
-        <path>/WEB-INF/tags/loglist.tag</path>
-    </tag-file>
-    
-    <tag-file>
-        <name>link</name>
-        <path>/WEB-INF/tags/link.tag</path>
-    </tag-file>
+  <tag-file>
+    <name>itemlist</name>
+    <path>/WEB-INF/tags/itemlist.tag</path>
+  </tag-file>
+
+  <tag-file>
+    <name>loglist</name>
+    <path>/WEB-INF/tags/loglist.tag</path>
+  </tag-file>
 
 </taglib>
