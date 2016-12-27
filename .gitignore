@@ -16,3 +16,9 @@ hs_err_pid*
 out
 gen
 /META-INF/application.xml
+/WebContent/META-INF
+
+# Eclipse files
+/.settings
+.project
+.classpath

@@ -6,20 +6,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.List;
+import simplestorefront.models.StoreItem;
 
 public class DBUtil {
 
-  //Note this would be a terrible idea in a large environment. This is very lazy and inefficient
-  //Also bad threading even synchronized
-  public synchronized static void pushItems(List<StoreItem> items) {
+  //Has potential to delete entire database
+	/*
+	public synchronized static void pushItems(List<StoreItem> items) {
     try {
       Class.forName("com.mysql.jdbc.Driver");
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
     }
-    String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu22";
-    String user = "cs3220stu22";
-    String password = "!z6j98!z";
+    String url = SQLAuth.getUrl();
+    String user = SQLAuth.getUser();
+    String password = SQLAuth.getPassword();
 
     Connection db = null;
 
@@ -27,6 +28,7 @@ public class DBUtil {
       db = DriverManager.getConnection(url, user, password);
 
       String sql = "DELETE FROM items";
+      
 
       PreparedStatement pstmt = db.prepareStatement(sql);
 
@@ -53,7 +55,7 @@ public class DBUtil {
         e.printStackTrace();
       }
     }
-  }
+  }*/
 
   public static List<StoreItem> getItems() {
     List<StoreItem> items = new LinkedList<StoreItem>();
@@ -63,9 +65,9 @@ public class DBUtil {
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
     }
-    String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu22";
-    String user = "cs3220stu22";
-    String password = "!z6j98!z";
+    String url = SQLAuth.getUrl();
+    String user = SQLAuth.getUser();
+    String password = SQLAuth.getPassword();
 
     Connection db = null;
 

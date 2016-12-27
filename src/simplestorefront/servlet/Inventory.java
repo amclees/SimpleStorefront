@@ -1,6 +1,7 @@
 package simplestorefront.servlet;
 
 import simplestorefront.models.DBUtil;
+import simplestorefront.models.SQLAuth;
 import simplestorefront.models.StoreItem;
 
 import javax.servlet.ServletException;
@@ -42,9 +43,9 @@ public class Inventory extends HttpServlet {
       } catch (ClassNotFoundException e) {
         e.printStackTrace();
       }
-      String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu22";
-      String user = "cs3220stu22";
-      String password = "!z6j98!z";
+      String url = SQLAuth.getUrl();
+      String user = SQLAuth.getUser();
+      String password = SQLAuth.getPassword();
 
       Connection db = null;
 
@@ -93,9 +94,9 @@ public class Inventory extends HttpServlet {
       } catch (ClassNotFoundException e) {
         e.printStackTrace();
       }
-      String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu22";
-      String user = "cs3220stu22";
-      String password = "!z6j98!z";
+      String url = SQLAuth.getUrl();
+      String user = SQLAuth.getUser();
+      String password = SQLAuth.getPassword();
 
       Connection db = null;
 
@@ -138,9 +139,9 @@ public class Inventory extends HttpServlet {
       } catch (ClassNotFoundException e) {
         e.printStackTrace();
       }
-      String url = "jdbc:mysql://cs3.calstatela.edu/cs3220stu22";
-      String user = "cs3220stu22";
-      String password = "!z6j98!z";
+      String url = SQLAuth.getUrl();
+      String user = SQLAuth.getUser();
+      String password = SQLAuth.getPassword();
 
       Connection db = null;
 
